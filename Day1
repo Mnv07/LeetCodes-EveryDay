@@ -1,0 +1,97 @@
+Sliding Window Algorithm:
+
+   LC 643 - Maximum Average subArray
+   
+   O(n^2) Approach: 
+       class Solution(Brute FORCE):
+    def findMaxAverage(self, nums: List[int], k: int) -> float:
+        
+        result = []
+        
+        
+        for i in range(len(nums) - k + 1):
+            sum = 0.0
+            for j in range(i, i + k):
+                sum += nums[j]
+            result.append(sum/k)
+        
+        return max(result)
+        
+   
+  --> Takes hell lot of time so not useful
+  instead use sliding windows that take O(n) :
+  
+  
+  class Solution:
+    def findMaxAverage(self, nums: List[int], k: int) -> float:
+        
+        
+        #O(n) solution 
+        windowSum, windowStart = 0.0, 0
+        result = []
+        
+        for windowEnd in range(len(nums)):
+            
+            windowSum += nums[windowEnd]
+            
+            if windowEnd >= k-1 :
+                result.append(windowSum/k)
+                windowSum -= nums[windowStart]
+                windowStart += 1
+        
+        return max(result)
+        
+        
+        
+ LC 209 - Minimum Size Subarray Sum
+ 
+ Notes: 1) Set up the result to inf so that we can return 0 if no such contiguous subarray is found
+        2) min of length can be found by using res =  min((r - l + 1 ,res)) where r is the right pointer, l is the left pointer and we add 1 as indices start from 1
+           for 0th element, res = 0-0+1 = 1 which is the length of a 1 element array. if +1 wasn't there, the res would be 0 which is an invalid length
+        3) We use while instead of for as we wanna keep shortening the window to find if the smaller amount of elements also equal or ever are greater   
+ 
+ O(n) solution:
+ import math
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        
+        #initializing left pointer and total
+        l = 0
+        total = 0
+        
+        #setting result to infinity for the not found case
+        res = math.inf
+        
+        #iterating through each element
+        for r in range(len(nums)):
+            
+            total += nums[r]
+            
+            #cruicial step to slide the window
+            while (total >= target):
+                res = min(r - l + 1 ,res)
+                total -= nums[l]
+                l += 1
+                
+        
+        return 0 if res == math.inf else res
+ 
+
+ 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
