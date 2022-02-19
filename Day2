@@ -1,0 +1,68 @@
+LC 169 - Majority element
+
+
+   ONLY DID BRUTE FORCE AND SORTED ARRAY METHODS:
+   
+   BRUTE FORCE DOESN'T GET ACCEPTED DUE TO A O(N^2) COMPLEXITY 
+   
+   class Solution(object):
+    def majorityElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        majority_count = len(nums)//2
+        
+        for val1 in nums:
+            count = 0
+            
+            for val2 in nums:
+                if val1 == val2:
+                    count += 1
+            
+            if count > majority_count:
+                return val1
+      
+      
+   SORTED ARRAYS METHOD:
+   TAKES (OnLogn time complexity):
+   
+  if len(nums) <= 2:
+        return nums[0]
+    
+    nums.sort()
+    maj = len(nums) // 2
+    counter = 1
+    
+    for i in range(1, len(nums)):
+        if nums[i] == nums[i - 1]:
+            counter += 1
+            if counter > maj:
+                return nums[i]
+        else:
+            counter = 1
+    
+    return nums[-1]
+    
+    
+    simplest one --> the element will appear at the n/2th position in odd/even case always so just return the n/2th element:
+    
+    
+    class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        
+        n_majority = len(nums)//2
+        nums.sort()
+        
+        return nums[n_majority]
+        
+   
+   
+   
+   Plus tried doing leetcode's happyNumber and valid parenthesis but they didn't really work....
+   
+   So, went ahead with the last Q for this day --> Count primes:
+   
+   BRUTE FORCE: check for each of the numbers from 2 to n-1 and see if it divides the number, if yes then not prime . else prime. also keep track of a counter-->
+   ALso looked up sieve of whatever , but got tired so stopped doing anymore.....
+        
