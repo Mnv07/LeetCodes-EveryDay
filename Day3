@@ -1,0 +1,70 @@
+LC 1984  -Minimum Difference Between Highest and Lowest of K Scores
+
+Sort the array of scores and simply use a sliding window to find the 
+min difference of scores of k players. 
+
+Time complexity = O(nlogn) :
+    O(logn) for sorting the array
+    O(n) for sliding the windows
+    
+    Solution right there:
+    class Solution:
+    def minimumDifference(self, nums: List[int], k: int) -> int:
+        
+        #sorting to make it easier to find near differences
+        nums.sort()
+        #initializing left and right pointers
+        l = 0
+        r = k - 1
+        #setting up the default invalid value
+        res = float("inf")
+        
+        #main sliding window algorithm here
+        while r < len(nums):
+            res = min(res, nums[r]-nums[l])
+            l += 1
+            r += 1
+        
+        return res
+        
+        
+LC 217 Contains Duplicate
+ Brute force: easy, but no use so not doing it here again
+ Better is to sort the array and then look for matches for every 2 consequitive elements:
+ 
+ Time complexity --> O(nlogn)
+ Space complexity --> O(1)
+ 
+ class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        
+        nums.sort()
+        for i in range(len(nums)-1):
+            if nums[i] == nums[i+1]:
+                return True
+        
+        return False
+ 
+ We could also use a hashset and trade off time complexity with space complexity but more on that in the later days
+        
+LC 219 Contains Duplicate II
+
+Simple , but with a very bad time complexity soln:
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        
+        for i in range(len(nums)):
+            for j in range(i+1, len(nums)):
+                
+                if(nums[i] == nums[j] and abs(i - j) <= k):
+                    return True
+        
+        return False
+
+This was a brute force solution so not very useful
+Can we do better? 
+Yes we can..
+
+
+        
+   
