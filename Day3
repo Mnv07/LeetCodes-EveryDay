@@ -64,6 +64,44 @@ class Solution:
 This was a brute force solution so not very useful
 Can we do better? 
 Yes we can..
+But we'll have to use a hashmap...Also can be done sliding windows, but it had many dislikes so..
+
+LC 1 --> 2 sum (2 pointer approach):
+
+from numpy import *
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        
+        #2 pointer technique
+        
+        #storing the array in a duplicate one
+        duplicate_nums = nums.copy()
+        nums.sort()
+        l = 0
+        r = len(nums)-1
+        val1 = val2 = 0
+        
+        while r >= l:
+            total = nums[l] + nums[r]
+            if total == target:
+                val1 = nums[l]
+                val2 = nums[r]
+                break
+            
+            elif total > target:
+                r -= 1
+            
+            else:
+                l += 1
+                
+        ans = []
+        ans.append(duplicate_nums.index(val1))
+        ans.append(duplicate_nums.index(val2))
+        
+        return ans
+
+tried this but it didn't work idk why
+
 
 
         
