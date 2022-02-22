@@ -101,7 +101,35 @@ class Solution:
         return ans
 
 tried this but it didn't work idk why
+So i was finding a solution but couldn't understand nythin , meanwhile stumbled upon Two Sum 2:
 
+Here, the array is sorted which makes it easier to implement the algorithm I was initially trying to in the previous case:
+
+LC 167 Two SUM 2:
+
+O(n) solution as array is sorted :)
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        
+        l = 0
+        r = len(numbers)-1
+        res = []
+        
+        while l <= r:
+            total = numbers[l] + numbers[r]
+            
+            if total == target:
+                res.append(l+1)
+                res.append(r+1)
+                break
+            
+            elif total > target:
+                r -= 1
+            
+            else:
+                l += 1
+            
+        return res
 
 
         
